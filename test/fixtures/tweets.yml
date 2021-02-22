@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contents: MyString
+  retweet: 1
+
+two:
+  contents: MyString
+  retweet: 1
