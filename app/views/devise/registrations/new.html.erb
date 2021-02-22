@@ -14,6 +14,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :img_user %><br />
+    <%= f.text_field :img_user, autocomplete: "Avatar" %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

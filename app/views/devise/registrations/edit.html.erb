@@ -6,12 +6,18 @@
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
-  </div>gi
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+
+  <div class="field">
+    <%= f.label :img_user %><br />
+    <%= f.text_field :img_user, autocomplete: "Avatar" %>
+  </div>
+
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
