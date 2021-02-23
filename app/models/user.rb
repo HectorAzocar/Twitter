@@ -16,6 +16,7 @@ class User < ApplicationRecord
       return filtro
     end
 end
+
 end
 
 

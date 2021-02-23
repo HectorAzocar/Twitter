@@ -27,19 +27,17 @@ ActiveRecord::Schema.define(version: 2021_02_22_185354) do
 
   create_table "tweets", force: :cascade do |t|
     t.string "contents"
+    t.boolean "retweeted", default: false
+    t.integer "original_tweet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "tweet_id"
-    t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "image_url"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -53,6 +51,5 @@ ActiveRecord::Schema.define(version: 2021_02_22_185354) do
 
   add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
-  add_foreign_key "tweets", "tweets"
   add_foreign_key "tweets", "users"
 end
