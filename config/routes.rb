@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
+  
   resources :tweets do
-    resources :likes
+  resources :likes
   end
 
-  get 'tweets/show'
-  devise_for :users
+  post 'tweets/retweet', to: 'tweets#retweet', as: 'retweet'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'tweets/new'

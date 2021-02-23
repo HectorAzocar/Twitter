@@ -1,37 +1,54 @@
 class LikesController < ApplicationController
+  before_action :find_tweet
+  before_action :find_like, only: [:destroy]
+  def index
 
-    before_action :find_tweet
-    before_action :find_like, only: [:destroy]
+  end
 
-    def index
+  def show
 
-    end
+  end
 
-    def new
+  def new
+  end
 
-    end
-
-    def chow
-
-    end
-
-    def create
-    
+  def create
     if already_liked?
-        flash[:notice] = "ya le diste like"
-      else
-        @tweet.likes.create(user_id: current_user.id)
-      end
-      redirect_to root_path(@tweet)
+      flash[:notice] = "Puedes dar like solo una vez"
+    else
+      @tweet.likes.create(user_id: current_user.id)
     end
+    redirect_to root_path(@tweet)
+  end
 
-    def destroy
-        if !(already_liked?)
-          flash[:notice] = "no puedes like"
-        else
-          @like.destroy
-        end
-        redirect_to root_path(@tweet)
-      end
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+    if !(already_liked?)
+      flash[:notice] = "No puedes sacar el like"
+    else
+      @like.destroy
+    end
+    redirect_to root_path(@tweet)
+  end
+
+  private 
+  def find_tweet
+    @tweet = Tweet.find(params[:tweet_id])
+    
+  end
+
+  def find_like
+    @like = @tweet.likes.find(params[:id])
+ end
+ 
+  def already_liked?
+    Like.where(user_id: current_user.id, tweet_id:
+    params[:tweet_id]).exists?
+  end
+  
 end
-

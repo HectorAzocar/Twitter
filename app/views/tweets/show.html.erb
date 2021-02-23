@@ -1,21 +1,20 @@
 <div class="row p-5 mb-2 bg-light text-dark">
-    <div class="col-4 offset-4">
-        <h3>Detalles del Tweet</h3>
-        <% pre_like = @tweet.likes.find{ |like| like.user_id == current_user.id} %>
-            <% if pre_like %>
-                <%= link_to raw('<i class="fas fa-heart fa-3x" style="color: #ea2c62 ;"></i>'), tweet_like_path(@tweet, pre_like), method: :delete, class:"m-3" %>
-            <% else %>
-                <%= link_to raw('<i class="far fa-heart fa-3x" style="color: #aaaaaa ;"></i>'), tweet_likes_path(@tweet), method: :post, class:"m-3" %>
-            <% end %>
-        <%= link_to raw('<i class="fas fa-share fa-3x""></i>'), retweet_path(@tweet), method: :post %>
+<div class="col-4 offset-4">
+<h3>Detalles del Tweet</h3>
+<% pre_like = @tweet.likes.find{ |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= link_to raw('<i class="fas fa-heart fa-3x" style="color: #ea2c62 ;"></i>'), tweet_like_path(@tweet, pre_like), method: :delete, class:"m-3" %>
+<% else %>
+  <%= link_to raw('<i class="far fa-heart fa-3x" style="color: #aaaaaa ;"></i>'), tweet_likes_path(@tweet), method: :post, class:"m-3" %>
+<% end %>
+<%= link_to raw('<i class="fas fa-share fa-3x""></i>'), retweet_path(@tweet), method: :post %>
 <br>
-        <% @users.each do |u|%>
-            <%  if @tweet.likes.find{ |like| like.user_id == u.id}%>
-                <img src=" <%= u.img_user %> " alt="image_user" style="weigth: 70px; height: 70px;" class="m-3"><br>
-            <% end %>
+<% @users.each do |u|%>
+        <%  if @tweet.likes.find{ |like| like.user_id == u.id}%>
+        <img src=" <%= u.img_user %> " alt="image_user" style="weigth: 70px; height: 70px;" class="m-3"><br>
         <% end %>
-            <%= link_to 'volver a inicio', retweet_path, class:"btn btn-primary" %>
-    </div>
-
+<% end %>
+<%= link_to 'volver a inicio', retweet_path, class:"btn btn-primary" %>
 </div>
 
+</div>
