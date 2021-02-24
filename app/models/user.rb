@@ -6,17 +6,8 @@ class User < ApplicationRecord
         
   has_many :tweets
   has_many :likes
-  
-  def tweets_for_me(friends)
-    filtro = Hash.new
-    friends.each do |f|
-      if current_user.id = f.friends_id 
-        filtro.push(f.friend_id)
-      end
-      return filtro
-    end
+    
 end
 
-end
 
 
