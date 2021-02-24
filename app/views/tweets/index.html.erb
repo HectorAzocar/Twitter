@@ -1,6 +1,6 @@
-<h1 class="text-center">Tweeter</h1>
+<h1 class="text-center">TWEETER</h1>
 <div class="container p-5 ">
-<%= link_to 'Crear un nuevo Tweet', new_tweet_path, class:"btn btn-primary pl-6 ml-5" if user_signed_in? %>
+<%= link_to 'Crear un nuevo Tweet', new_tweet_path, class:"btn btn-dark pl-6 ml-5" if user_signed_in? %>
 </div>
 <div class="container p-5 mb-2 bg-light text-dark">
 <%= paginate @tweets %>
@@ -14,11 +14,18 @@
 <br>
         <% if tweet.user == current_user %>
         <div class="my-3">
-        <span class="mx-2"><%= link_to 'eliminar', tweet,class:"btn btn-primary pl-6 ml-5", method: :delete, data: { confirm: 'Estas seguro?' } %></span>
-        <span class="mx-2"><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></span>
+         
+        <span class="mx-2"><%= form_with(model: Tweet.new) do |form| %>
+        <%= form.submit 'Crear Tweet', class:"btn btn-dark"%>
+        <%= link_to 'Retweet', new_tweet_path, class:"btn btn-dark pl-6 ml-5" if user_signed_in? %></span>
+       
         <% end %>
-        <span>Retweets:<%= tweet.tweet.count %> </span>
-        <span class="mx-2"><%= link_to 'Retweet', new_tweet_path, class:"btn btn-primary pl-6 ml-5" if user_signed_in? %></span>
+       
+        
+        <span class="mx-2"><%= link_to 'Eliminar', tweet,class:"btn btn-danger pl-6 ml-3", method: :delete, data: { confirm: 'Estas seguro?' } %></span>
+        <span class="mx-2"><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></span>
+        <span>Retweets:<%= tweet.retweets_for_me.count %> </span>
+        <% end %>
         </div>
       </div>
     </div>
@@ -26,5 +33,4 @@
 <span><%= paginate @tweets %></span>
     
 </div>
-
 

@@ -3,8 +3,7 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show destroy ]
 
   def index
-    @tweets = Tweet.order(created_at: :desc).page(params[:page]).per(50).includes(:tweet)
-   
+    @tweets =Tweet.all.order(created_at: :desc).page(params[:page]).per(50)
   end
 
   def show
@@ -13,44 +12,54 @@ class TweetsController < ApplicationController
   end
 
   def new
-      @tweet = Tweet.new
+    @tweet = Tweet.new
   end
 
   def create 
-      @tweet = Tweet.new(tweet_params)
-      @tweet.user_id = current_user.id if current_user
-      @tweet.save
-
-      if @tweet.save
-        flash[:success] = "Se creo exitosamente el Tweet"
-        redirect_to root_path
-      else
-        flash[:error] = "Algo paso, intentalo de nuevo"
-        render 'new'
-      end
+    @tweet = Tweet.new(tweet_params)
+    @tweet.user_id = current_user.id if current_user
+    #flag para saber si es retweet o no
+    retweet_q = params[:tweet][:retweeted]
+    tweet_id = params[:tweet][:id] 
+    
+    if retweet_q
+      original_tweet_contents = Tweet.find(tweet_id).contents
+      @tweet.retweeted = true
+      @tweet.original_tweet_id = tweet_id
+      @tweet.contents = original_tweet_contents
+    end
+    
+    if @tweet.save
+      flash[:alert] = "Se creo exitosamente"
+      redirect_to root_path
+    else
+      flash[:alert] = "Algo paso, intentalo de nuevo"
+      render 'new'
+    end
   end
+  
+  # def edit
+  # end
 
-def retweet
-  original_tweet = Tweet.find(params[:id])
-
-  @retweet = Tweet.new(
-    user_id: current_user.id,
-    content: original_tweet.content)
-  if @retweet.save
-    redirect_to retweet_path, alert: ' Hiciste Retweet!'
-  else
-    redirect_to root_path, alert: ' No pudiste hacer retweet'
-  end
-end
-
+  # def update
+  #     respond_to do |format|
+  #         if @tweet.update(tweet_params)
+  #           format.html { redirect_to @tweet, notice: "el tweet fue modificado" }
+  #           format.json { render :show, status: :ok, location: @tweet }
+  #         else
+  #           format.html { render :edit, status: :unprocessable_entity }
+  #           format.json { render json: @tweet.errors, status: :unprocessable_entity }
+  #         end
+  #       end
+  # end
 
   def destroy
       @tweet = Tweet.find(params[:id])
       if @tweet.destroy
-          flash[:success] = 'El tweet fue borrado con exito.'
+          flash[:alert] = 'El tweet fue borrado con exito.'
           redirect_to tweets_url
       else
-          flash[:error] = 'algo paso, intentalo de nuevo'
+          flash[:alert] = 'algo paso, intentalo de nuevo'
           redirect_to tweets_url
       end
   end
@@ -69,6 +78,4 @@ end
   def tweet_params
     params.require(:tweet).permit(:contents, :id_user, :tweet_id)
   end
-
-
 end

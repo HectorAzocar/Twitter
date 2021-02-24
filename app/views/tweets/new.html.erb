@@ -5,10 +5,10 @@
       <%= form_with(model: @tweet, local: true) do |form| %>
       <%= form.text_area :contents, size: "60x10" %>
       <span>
-      <%= form.submit 'crear tweet', class:"btn btn-primary"%>
+      <%= form.submit 'crear tweet', class:"btn btn-dark"%>
       </span>
       <% end %>
     </div>
   </div>
-      <%= link_to 'volver al incio',root_path , class:"btn btn-primary ml-4" %>
+      <%= link_to 'volver al incio',root_path , class:"btn btn-dark ml-4" %>
 </div>
