@@ -22,3 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+https://dashboard.heroku.com/apps/sheltered-badlands-72768
