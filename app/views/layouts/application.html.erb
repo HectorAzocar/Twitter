@@ -20,10 +20,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
     <div>
       <% if user_signed_in? %>
-        <%= link_to "logout", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-lg" %>
+        <%= link_to "logout", destroy_user_session_path, method: :delete, class: "btn btn-warning btn-lg" %>
         <span class="text-white font-weight-bold p-2" style="font-size: 27px;" >Bienvenido <%= current_user.user_name %>!</span>
       <% else %>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-warning btn-lg" %>
         <%= link_to "Register", new_user_registration_path, class: "btn btn-success btn-lg" %>
       <% end %>
     </div>

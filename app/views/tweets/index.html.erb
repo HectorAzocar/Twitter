@@ -1,13 +1,13 @@
 <h1 class="text-center">TWEETER</h1>
-<div class="container p-5 ">
-<%= link_to 'Crear un nuevo Tweet', new_tweet_path, class:"btn btn-dark pl-6 ml-5" if user_signed_in? %>
-</div>
-<div class="container p-5 mb-2 bg-light text-dark">
-<%= paginate @tweets %>
-    <% @tweets.each do |tweet| %>
-    <div class="media rounded border border-info m-4">
-      <img class="m-3 rounded border border-info" src="<%= tweet.user.img_user %> " alt="image_user" style="weigth: 70px; height: 70px;">
-      <div class="media-body">
+  <div class="container p-5 ">
+    <%= link_to 'Crear un nuevo Tweet', new_tweet_path, class:"btn btn-dark pl-6 ml-5" if user_signed_in? %>
+  </div>
+    <div class="container p-5 mb-2 bg-light text-dark">
+      <%= paginate @tweets %>
+      <% @tweets.each do |tweet| %>
+      <div class="media rounded border border-info m-4">
+        <img class="m-3 rounded border border-info" src="<%= tweet.user.img_user %> " alt="image_user" style="weigth: 70px; height: 70px;">
+        <div class="media-body">
         <h5 class="m-2"><%= tweet.user.user_name %></h5>
         <p class=""><%= tweet.contents %></p>
         <h5><%= link_to "Tweeted #{time_ago_in_words(tweet.created_at)} ago ", tweet %></h5>
@@ -26,11 +26,11 @@
         <span class="mx-2"><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></span>
         <span>Retweets:<%= tweet.retweets_for_me.count %> </span>
         <% end %>
-        </div>
       </div>
     </div>
+  </div>
     <% end %>
-<span><%= paginate @tweets %></span>
+  <span><%= paginate @tweets %></span>
     
 </div>
 
