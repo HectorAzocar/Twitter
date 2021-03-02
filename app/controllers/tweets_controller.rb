@@ -50,6 +50,10 @@ class TweetsController < ApplicationController
       end
   end
   
+  def api
+    @tweets = Tweet.all
+    render json: @tweets.to_json(only: [:id, :contents])
+  end
 
   private
   

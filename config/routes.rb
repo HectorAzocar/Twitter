@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   resources :tweets do
     resources :likes
   end
-
-  post 'tweets/retweet', to: 'tweets#retweet', as: 'retweet'
   get 'tweet/new'
   get 'users/:id', to: 'users#show', as: 'user_profile'
+  get 'api/news', to: 'tweets#api'
+  post 'tweets/retweet', to: 'tweets#retweet', as: 'retweet'
   post 'friends', to: "friends#create", as: 'friends'
   delete 'friends/:id', to: 'friends#destroy', as: 'delete_friend'
   
