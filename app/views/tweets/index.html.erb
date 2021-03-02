@@ -25,7 +25,9 @@
         <span class="mx-2"><%= link_to 'Eliminar', tweet,class:"btn btn-danger pl-6 ml-3", method: :delete, data: { confirm: 'Estas seguro?' } %></span>
         <span class="mx-2"><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></span>
         <span>Retweets:<%= tweet.retweets_for_me.count %> </span>
+        
         <% end %>
+        
       </div>
     </div>
   </div>

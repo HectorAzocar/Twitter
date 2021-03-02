@@ -1,0 +1,12 @@
+<h1>skdhfuisdfoijd</h1>
+<div class="container p-5 ">
+    <img class="m-3 rounded border border-info" src="<%= @user.img_user %> " alt="image_user" style="weigth: 70px; height: 70px;">
+    <% if @user == current_user%>
+        
+    <% elsif current_user.is_friend_with(@user) == true%>
+        <span class="mx-2"><%= link_to 'Eliminar de amigos', delete_friend_path(id: @user.id), method: :delete, class:"btn btn-primary pl-6 ml-5" %></span>
+    <% else %>
+        <span class="mx-2"><%= link_to 'Agregar amigo', friends_path(friend_id: @user.id), method: :post, class:"btn btn-primary pl-6 ml-5" %></span>
+    <% end %>
+</div>
+<%= link_to 'volver al incio',root_path , class:"btn btn-primary ml-4" %>

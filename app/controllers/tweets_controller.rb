@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
   def index
     @tweets =Tweet.all.order(created_at: :desc).page(params[:page]).per(50)
   end
+  
 
   def show
     @users = User.all
@@ -18,11 +19,10 @@ class TweetsController < ApplicationController
   def create 
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id if current_user
-    #flag para saber si es retweet o no
-    retweet_q = params[:tweet][:retweeted]
+    retweet_r = params[:tweet][:retweeted]
     tweet_id = params[:tweet][:id] 
     
-    if retweet_q
+    if retweet_r
       original_tweet_contents = Tweet.find(tweet_id).contents
       @tweet.retweeted = true
       @tweet.original_tweet_id = tweet_id
